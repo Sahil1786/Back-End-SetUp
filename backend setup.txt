@@ -1,0 +1,33 @@
+const express=require("express");
+const bodyparser=require("body-parser");
+const ejs =require("ejs");
+const mongoose=require('mongoose');
+
+const app=express()
+app.set('view engine','ejs');
+app.use(bodyparser.urlencoded({
+    extended:true
+}));
+
+app.use(express.static("public"));
+
+
+mongoose.connect("mongodb://127.0.0.1:27017/wikiDB").then(()=>{
+    console.log("Db connected..")
+
+
+})
+.catch((err)=>{
+    console.log(err)
+  })
+  ;//mongo db error throw up
+
+
+const articaleSchema={
+    tittle:"String", // db not showing showing empty
+    content:"String"
+};
+
+const Article=mongoose.model("Article",articaleSchema);
+
+
